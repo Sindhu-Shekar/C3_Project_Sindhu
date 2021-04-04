@@ -1,7 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.time.Clock;
 
 public class Restaurant {
     private String name;
@@ -9,24 +11,28 @@ public class Restaurant {
     public LocalTime openingTime;
     public LocalTime closingTime;
     private List<Item> menu = new ArrayList<Item>();
+    private Clock clock;
 
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
         this.location = location;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
+        initDefaultClock();
     }
 
     public boolean isRestaurantOpen() {
-        return true;
-        //DELETE ABOVE STATEMENT AND WRITE CODE HERE
+        if (getCurrentTime().isAfter(closingTime) || getCurrentTime().isBefore(openingTime)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    public LocalTime getCurrentTime(){ return  LocalTime.now(); }
+    public LocalTime getCurrentTime(){ return  LocalTime.now(clock); }
 
     public List<Item> getMenu() {
-        return null;
-        //DELETE ABOVE RETURN STATEMENT AND WRITE CODE HERE
+        return Collections.unmodifiableList(menu);
     }
 
     private Item findItemByName(String itemName){
@@ -63,4 +69,15 @@ public class Restaurant {
         return name;
     }
 
+    public void setClock(Clock newClock) {
+        clock = newClock;
+    }
+
+    public void initDefaultClock() {
+        setClock(
+                Clock.system(
+                        Clock.systemDefaultZone().getZone()
+                )
+        );
+    }
 }
