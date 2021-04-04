@@ -80,4 +80,9 @@ public class Restaurant {
                 )
         );
     }
+
+    public double getAllItemNames(String...itemNames){
+        double allItemsCheck = 0.0;
+        return allItemsCheck;
+    }
 }

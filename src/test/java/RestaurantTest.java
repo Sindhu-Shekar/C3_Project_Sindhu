@@ -74,4 +74,14 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void get_total_value_of_items_selected_by_user(){
+        generateConstantData();
+        assertEquals(688, restaurant.getAllItemNames("Vegetable lasagne", "Sweet corn soup", "French Toast"));
+    }
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>
 }
