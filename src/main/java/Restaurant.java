@@ -83,6 +83,18 @@ public class Restaurant {
 
     public double getAllItemNames(String...itemNames){
         double allItemsCheck = 0.0;
+        for(String itemName : itemNames){
+            allItemsCheck += getOrderValueByName(itemName);
+        }
         return allItemsCheck;
+    }
+
+    public double getOrderValueByName(String getItemName){
+        double totalPrice = 0.0;
+        for(Item item : menu){
+            if (item.getName().equals(getItemName))
+                totalPrice += item.getPrice();
+        }
+        return totalPrice;
     }
 }
